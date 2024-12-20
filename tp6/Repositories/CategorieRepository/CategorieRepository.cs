@@ -16,7 +16,7 @@ namespace tp6.Repositories.CategorieRepository
         }
         public CategorieDto Add(CategorieDto categorie)
         {
-            //categorie.Id = Guid.NewGuid();
+            
             var cat = _imapper.Map<Categorie>(categorie);
             _context.Categorie.Add(cat);
             _context.SaveChanges();

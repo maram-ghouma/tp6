@@ -87,14 +87,14 @@ public class UserController : ControllerBase
             return BadRequest("Role name cannot be empty");
         }
 
-        // Check if the role already exists
+        
         var roleExists = await _roleManager.RoleExistsAsync(roleName);
         if (roleExists)
         {
             return BadRequest($"Role '{roleName}' already exists.");
         }
 
-        // Create the new role
+        
         var roleResult = await _roleManager.CreateAsync(new IdentityRole(roleName));
         if (roleResult.Succeeded)
         {
@@ -128,7 +128,7 @@ public class UserController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> CreateUser([FromBody] JsonElement requestBody)
     {
-        // Extract properties from JsonElement safely
+       
         if (!requestBody.TryGetProperty("userName", out var userNameElement))
         {
             return BadRequest("UserName is missing.");
@@ -150,14 +150,14 @@ public class UserController : ControllerBase
 
         var password = passwordElement.GetString();
 
-        // Create a new user
+        
         var newUser = new ApplicationUser
         {
             UserName = userName,
             Email = email
         };
 
-        // Attempt to create the user
+        
         var result = await _userManager.CreateAsync(newUser, password);
         if (result.Succeeded)
         {

@@ -15,16 +15,16 @@ namespace tp6.Controllers
     public class AuthController : ControllerBase
     {
         private readonly JWTBearerTokenSettings jwtBearerTokenSettings;
-        private readonly UserManager<ApplicationUser> userManager;  // Use ApplicationUser instead of IdentityUser
+        private readonly UserManager<ApplicationUser> userManager;  
 
         public AuthController(IOptions<JWTBearerTokenSettings> jwtTokenOptions,
-                              UserManager<ApplicationUser> userManager)  // Inject UserManager<ApplicationUser>
+                              UserManager<ApplicationUser> userManager)  
         {
             this.jwtBearerTokenSettings = jwtTokenOptions.Value;
             this.userManager = userManager;
         }
 
-        // Register method to create a new user
+        
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register([FromBody] RegisterCredentials userDetails)
@@ -65,7 +65,7 @@ namespace tp6.Controllers
             return Ok(new { Message = "User Registration Successful" });
         }
 
-        // Login method to authenticate and generate a JWT token
+        // Login method 
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginCredentials credentials)
@@ -89,7 +89,7 @@ namespace tp6.Controllers
         [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
-            // Implement logout logic if necessary (invalidate token if needed)
+            
             return Ok(new { Token = "", Message = "Logged Out" });
         }
 
